@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  dhcp:
+    build:
+      context: ./dhcp
+    restart: unless-stopped
+    volumes:
+      - ./dhcp/data:/data
+    environment:
+      - INTERFACES=enp0s8
+      - DHCPD_PROTOCOL=4
+    network_mode: "host"
+  sftp:
+    image: atmoz/sftp
+    restart: unless-stopped
+    volumes:
+      - ./sftp/keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
+      - ./sftp/keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
+      - ./sftp/data:/home
+      - ./sftp/users.conf:/etc/sftp/users.conf:ro
+    ports:
+      - "22:22"
+
+  dns:
+    image: internetsystemsconsortium/bind9:9.16
+    restart: unless-stopped
+    volumes:
+      - ./dns/etc:/etc/bind
+      - ./dns/lib:/var/lib/bind
+    network_mode: "host"
