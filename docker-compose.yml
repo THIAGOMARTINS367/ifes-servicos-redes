@@ -11,6 +11,28 @@ services:
       - INTERFACES=enp0s8
       - DHCPD_PROTOCOL=4
     network_mode: "host"
+
+  dns:
+    image: internetsystemsconsortium/bind9:9.16
+    restart: unless-stopped
+    volumes:
+      - ./dns/etc:/etc/bind
+      - ./dns/lib:/var/lib/bind
+      - ./dns/cache:/var/cache/bind
+    network_mode: "host"
+
+  proxy:
+    image: ubuntu/squid
+    restart: unless-stopped
+    environment:
+      - TZ=America/Sao_Paulo
+    volumes:
+      - ./proxy/squid.conf:/etc/squid/squid.conf
+      - ./proxy/cache:/var/spool/squid
+      - ./proxy/domain_blacklist.txt:/etc/squid/domain_blacklist.txt
+      - ./proxy/regex_blacklist.txt:/etc/squid/regex_blacklist.txt
+    network_mode: "host"
+
   sftp:
     image: atmoz/sftp
     restart: unless-stopped
@@ -22,10 +44,8 @@ services:
     ports:
       - "22:22"
 
-  dns:
-    image: internetsystemsconsortium/bind9:9.16
+  app:
+    image: mcr.microsoft.com/dotnet/sdk
     restart: unless-stopped
-    volumes:
-      - ./dns/etc:/etc/bind
-      - ./dns/lib:/var/lib/bind
-    network_mode: "host"
+    ports:
+      - "5001:5001"

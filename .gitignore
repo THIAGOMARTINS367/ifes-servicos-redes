@@ -1,2 +1,7 @@
-sftp/keys
-sftp/data
+sftp/keys/*
+sftp/data/*
+dns/cache/*
+proxy/cache/*
+!/**/.gitkeep
+dhcp/data/*
+!dhcp/data/dhcpd.conf

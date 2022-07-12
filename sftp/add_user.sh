@@ -11,4 +11,4 @@ echo $SCRIPTPATH
 uid=$(id -u)
 gid=$(id -g)
 
-echo $1:$password:e:$uid:upload >> $SCRIPTPATH/users.conf
+echo $1:$password:e:$uid:$gid:upload >> $SCRIPTPATH/users.conf
