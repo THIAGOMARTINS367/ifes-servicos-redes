@@ -1,6 +1,6 @@
 #!/bin/bash
 
-password=$(echo -n "teste" | docker run -i --rm atmoz/makepasswd --crypt-md5 --clearfrom=- | awk '{print $2}')
+password=$(echo -n "$2" | docker run -i --rm atmoz/makepasswd --crypt-md5 --clearfrom=- | awk '{print $2}')
 
 # Absolute path to this script, e.g. /home/user/bin/foo.sh
 SCRIPT=$(readlink -f "$0")
