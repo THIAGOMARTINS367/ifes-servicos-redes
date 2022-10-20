@@ -12,14 +12,14 @@ services:
       - DHCPD_PROTOCOL=4
     network_mode: "host"
 
-  # dns:
-  #   image: internetsystemsconsortium/bind9:9.16
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./dns/etc:/etc/bind
-  #     - ./dns/lib:/var/lib/bind
-  #     - ./dns/cache:/var/cache/bind
-  #   network_mode: "host"
+  dns:
+    image: internetsystemsconsortium/bind9:9.16
+    restart: unless-stopped
+    volumes:
+      - ./dns/etc:/etc/bind
+      - ./dns/lib:/var/lib/bind
+      - ./dns/cache:/var/cache/bind
+    network_mode: "host"
 
   # proxy:
   #   image: ubuntu/squid
