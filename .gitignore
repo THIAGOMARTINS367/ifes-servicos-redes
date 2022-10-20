@@ -5,3 +5,4 @@ proxy/cache/*
 !/**/.gitkeep
 dhcp/data/*
 !dhcp/data/dhcpd.conf
+!dhcp/data/dhcpd.leases
