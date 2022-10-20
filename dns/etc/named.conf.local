@@ -6,12 +6,12 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
-zone "fernando.com" {
+zone "thiagomartins.com" {
 	type master;
-	file "/var/lib/bind/db.fernando.com";
+	file "/var/lib/bind/db.thiagomartins.com";
 };
 
 zone "192.in-addr.arpa" {
     type master;
-    file "/var/lib/bind/db.fernando.com.rev";
+    file "/var/lib/bind/db.thiagomartins.com.rev";
 };
